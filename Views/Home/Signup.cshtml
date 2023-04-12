@@ -1,0 +1,62 @@
+﻿@model NgoProjectNew1.Models.ViewModel.SignUpViewModel
+@{
+    ViewData["Title"] = "Signup";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="container">
+    <div class="row mt-lg-3">
+        <div class="col-6 offset-3 border border-primary rounded pl-5 pr-5 pb-5">
+            <div class="text-center">
+                <h1 class="text-info">Member Registration Form</h1>
+            </div>
+            <h5 class="text-danger text-center">@TempData["errorMessage"]</h5>
+            <form action="@Url.Action("Signup", "Home")" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Username"></label>
+                    <input type="text" name="Username" placeholder="Enter Username" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input type="text" name="Name" placeholder="Enter full name" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContactNo"></label>
+                    <input type="text" name="ContactNo" placeholder="Enter Contact Number" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="ContactNo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address"></label>
+                    <input type="text" name="Address" placeholder="Enter Address" class="form-control" autocomplete="off" />
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input type="password" name="Password" placeholder="Enter Password" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword"></label>
+                            <input type="password" name="confirmPassword" placeholder="Confirm Password" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success btn-lg mb-1 float-right" value="Verify" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
