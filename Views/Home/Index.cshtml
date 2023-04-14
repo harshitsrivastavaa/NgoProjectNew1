@@ -1,14 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<h1>Hi</h1>
 <style>
-
-<<<<<<< HEAD
-<div class="text-center">
-    <h1 class="display-4">Welcome hello from the user </h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-=======
   @*  .carousel-item{
         height:100vh;
         min-height:300px;
@@ -16,6 +9,37 @@
     .carousel-caption{
   @*      bottom:25%;*@
         z-index:1
+    }
+    .carousel-caption h5 {
+            font-size:45px;
+            text-transform:uppercase;
+            letter-spacing:2px;
+            margin-top:25px;
+        }
+    .carousel-caption p{
+        margin:auto;
+        font-size:18px;
+        line-height:1.9
+    }
+    .carousel-inner::before{
+        content:'';
+        position:absolute;
+        width:100%;
+        height:100%;
+        top:0;
+        left:0;
+        background:rgba(0,0,0,0.7);
+        z-index:1;
+    }
+</style>
+<!--<style>-->
+  @*  .carousel-item{
+        height:100vh;
+        min-height:300px;
+    }*@
+    <!--.carousel-caption{-->
+  @*      bottom:25%;*@
+        <!--z-index:1
     }
     .carousel-caption h5 {
             font-size:45px;
@@ -40,7 +64,7 @@
         z-index:1;
 
     }
-</style>
+</style>-->
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -85,7 +109,6 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
->>>>>>> b8f4d984e7f11f1407d2a7260bf4738e7545f395
 </div>
 @*
     <div class="carousel-item">

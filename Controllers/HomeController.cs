@@ -83,7 +83,7 @@ namespace NgoProjectNew1.Controllers
         public IActionResult LogOut()
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         [AcceptVerbs("Get","Post")]
