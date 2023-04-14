@@ -6,6 +6,18 @@
     <title>@ViewData["Title"] - NgoProjectNew1</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+            .blink {
+                animation: blinker 1.5s linear infinite;
+                color: red;
+                font-family: sans-serif;
+            }
+            @@keyframes blinker {
+                50% {
+                    opacity: 0;
+                }
+            }
+    </style>
 </head>
 <body>
     <header>
@@ -88,10 +100,10 @@
 
                     <ul class="navbar-nav ml-auto text-center mb-lg-0 mb-2">
                         <li class="nav-item" id="link">
-                            <a class="nav-link border rounded" id="auth" asp-area="" asp-controller="Home" asp-action="Privacy">Login</a>
+                            <a class="nav-link border rounded" id="auth" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
                         </li>
                         <li class="nav-item" id="link">
-                            <a class="nav-link border rounded" id="auth" asp-area="" asp-controller="Signup" asp-action="Signup">Register</a>
+                            <a class="nav-link border rounded" id="auth" asp-area="" asp-controller="Home" asp-action="Signup">Register</a>
                         </li>
 
                     </ul>
@@ -102,16 +114,14 @@
 
         </nav>
     </header>
-    <div class="container">
+    <div >
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - NgoProjectNew1 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+        <marquee class="blink">This is an example of blinking text using CSS within a marquee.</marquee>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
