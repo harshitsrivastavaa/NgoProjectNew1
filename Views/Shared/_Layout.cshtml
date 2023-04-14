@@ -9,8 +9,8 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
+        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Helping Others</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -26,13 +26,67 @@
                         </li>
                     </ul>
                 </div>
-                @if (User.Identity.IsAuthenticated) 
-                { 
+                @if (User.Identity.IsAuthenticated)
+                {
                     <div class="navbar float-right">
-                        <span>Welcome </span><span class="text-success font-weight-bold p-2">@User.Identity.Name.ToUpper()</span><a class="btn btn-sm btn-danger font-weight-bold" asp-action="LogOut" asp-controller="Home" >SignOut</a> 
+                        <span>Welcome </span><span class="text-success font-weight-bold p-2">@User.Identity.Name.ToUpper()</span><a class="btn btn-sm btn-danger font-weight-bold" asp-action="LogOut" asp-controller="Home" >SignOut</a>
                     </div>
                 }
+
+        </nav>*@
+        <nav class="navbar navbar-toggleable-sm navbar-expand-sm bg-dark navbar-dark ">
+            <div class="container">
+
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/brand.png" alt="logo" style="width:25px;height:30px" />
+                    <span style="font-size:15px">Hygia</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between ">
+                    <ul class="navbar-nav ml-auto text-center mb-lg-0 mb-2">
+                        <li class="nav-item ">
+                            <a class="nav-link active " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Contact Us</a>
+                        </li>
+
+                    </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="navbar float-right">
+                            <span>Welcome </span><span class="text-success font-weight-bold p-2">@User.Identity.Name.ToUpper()</span><a class="btn btn-sm btn-danger font-weight-bold" asp-action="LogOut" asp-controller="Home">SignOut</a>
+                        </div>
+                    }
+                    else
+
+                    {
+
+                    <ul class="navbar-nav ml-auto text-center mb-lg-0 mb-2">
+                        <li class="nav-item" id="link">
+                            <a class="nav-link border rounded" id="auth" asp-area="" asp-controller="Home" asp-action="Privacy">Login</a>
+                        </li>
+                        <li class="nav-item" id="link">
+                            <a class="nav-link border rounded" id="auth" asp-area="" asp-controller="Signup" asp-action="Signup">Register</a>
+                        </li>
+
+                    </ul>
+
+                    }
+                </div>
             </div>
+
         </nav>
     </header>
     <div class="container">

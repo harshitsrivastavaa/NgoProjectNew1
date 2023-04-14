@@ -93,6 +93,7 @@ namespace NgoProjectNew1.Controllers
                 return Json(true);
             }
         }
+     
         public IActionResult SignUp()
         {
 
@@ -117,7 +118,7 @@ namespace NgoProjectNew1.Controllers
                 TempData["successMessage"] = "Registartion done successfully";
                 return RedirectToAction("Login");
             }
-            else
+            else 
             {
                 TempData["errorMessage"] = "Empty form can't be submitted!";
                 return View(model);
