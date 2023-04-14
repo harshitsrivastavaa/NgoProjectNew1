@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <style>
+<<<<<<< HEAD
             .blink {
                 animation: blinker 1.5s linear infinite;
                 color: red;
@@ -17,48 +18,36 @@
                     opacity: 0;
                 }
             }
+=======
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar-light, .navbar-brand {
+            color: #000;
+            font-size: 25px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 2px
+        }
+
+        #link {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        #auth {
+            background-color: #98DFD6;
+            color: black;
+        }
+>>>>>>> d94c63ea8e87a004e96907949e636dda7015ccb8
     </style>
 </head>
+
 <body>
     <header>
-        @* <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Helping Others</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <div class="navbar float-right">
-<<<<<<< HEAD
-                        <span>Welcome </span><span class="text-success font-weight-bold p-2">@User.Identity.Name.ToUpper()</span><a class="btn btn-sm btn-danger font-weight-bold" asp-action="LogOut" asp-controller="Home">SignOut</a>
-                    </div>
-
-
-                }
-                else
-                {
-                    <div class="navbar float-right">
-                        <a class="btn btn-sm btn-danger font-weight-bold" asp-action="LogIn" asp-controller="Home">Login</a>
-                        <a class="btn btn-sm btn-danger font-weight-bold" asp-action="SignUp" asp-controller="Home">SignIn</a>
-=======
-                        <span>Welcome </span><span class="text-success font-weight-bold p-2">@User.Identity.Name.ToUpper()</span><a class="btn btn-sm btn-danger font-weight-bold" asp-action="LogOut" asp-controller="Home" >SignOut</a>
->>>>>>> 1907dbb38f73682be0ad8efdfeba48ba8ab47377
-                    </div>
-                }
-
-        </nav>*@
+     
         <nav class="navbar navbar-toggleable-sm navbar-expand-sm bg-dark navbar-dark ">
             <div class="container">
 
@@ -90,9 +79,9 @@
                     </ul>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <div class="navbar float-right">
-                            <span>Welcome </span><span class="text-success font-weight-bold p-2">@User.Identity.Name.ToUpper()</span><a class="btn btn-sm btn-danger font-weight-bold" asp-action="LogOut" asp-controller="Home">SignOut</a>
-                        </div>
+             
+                            <span class="ml-auto" style="color:white">Welcome </span><span class="text-success font-weight-bold p-2">@User.Identity.Name.ToUpper()</span><a class="btn btn-sm btn-danger font-weight-bold" asp-action="LogOut" asp-controller="Home">SignOut</a>
+                       
                     }
                     else
 
@@ -103,7 +92,11 @@
                             <a class="nav-link border rounded" id="auth" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
                         </li>
                         <li class="nav-item" id="link">
+<<<<<<< HEAD
                             <a class="nav-link border rounded" id="auth" asp-area="" asp-controller="Home" asp-action="Signup">Register</a>
+=======
+                            <a class="nav-link border rounded" id="auth" asp-action="Signup">Register</a>
+>>>>>>> d94c63ea8e87a004e96907949e636dda7015ccb8
                         </li>
 
                     </ul>

@@ -40,10 +40,10 @@ namespace NgoProjectNew1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var data = _context.NgoRegMembers.Where(e => e.Username == model.Username);
+                var data = _context.NgoRegMembers.Where(e => e.Username == model.Username).SingleOrDefault();
                 if (data != null)
                 {
-                    bool isValid = (data.FirstOrDefault().Username == model.Username && data.FirstOrDefault().Password == model.Password);
+                    bool isValid = (data.Username == model.Username && data.Password == model.Password);
                     if (isValid)
                     {
                         var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, model.Username) },
@@ -83,7 +83,7 @@ namespace NgoProjectNew1.Controllers
         public IActionResult LogOut()
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         [AcceptVerbs("Get","Post")]
