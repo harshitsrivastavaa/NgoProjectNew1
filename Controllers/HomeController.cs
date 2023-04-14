@@ -51,6 +51,12 @@ namespace NgoProjectNew1.Controllers
                         var principal = new ClaimsPrincipal(identity);
                         HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
                         HttpContext.Session.SetString("Username", model.Username);
+                        if (model.Username == "Admin")
+                        {
+                            HttpContext.Session.SetString("Username", model.Username);
+                            return RedirectToAction("Index","Admin");
+                        }
+                        else
                         return RedirectToAction("Index", "Home");
 
                     }
@@ -80,10 +86,11 @@ namespace NgoProjectNew1.Controllers
             return RedirectToAction("Login", "Home");
         }
 
-        [AcceptVerbs("Post","Get")]
-        public IActionResult UserNameIsExist(string userName)
+        [AcceptVerbs("Get","Post")]
+        public JsonResult UserNameIsExist(string userName)
         {
             var data = _context.NgoRegMembers.Where(e => e.Username == userName).SingleOrDefault();
+
             if (data != null)
             {
                 return Json($"Username {userName} already exist");
@@ -124,8 +131,6 @@ namespace NgoProjectNew1.Controllers
             }
         }
 
-       
-  
      }
  }
 

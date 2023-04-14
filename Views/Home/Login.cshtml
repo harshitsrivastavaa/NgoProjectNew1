@@ -20,9 +20,9 @@
                     <input type="password" name="Password" placeholder="Enter Password" class="form-control" autocomplete="off" />
                     <span class="text-danger">@TempData["errorPassword"]</span>
                 </div>
-                <div class="form-group row mt-lg-3">
+                <div class="form-group row mt-lg-3 text-center">
                     <input type="submit" class="btn btn-block btn-primary mb-2" value="Login" />
-                    <a class="text-light btn btn-primary font-weight-bold" asp-action="SignUp" asp-controller="Home">Become a member</a>
+                    <a class="btn btn-block btn-primary" style="background-color:lightgreen;color:black" asp-action="SignUp" asp-controller="Home">Become a member</a>
                 </div>
             </form>
         </div>

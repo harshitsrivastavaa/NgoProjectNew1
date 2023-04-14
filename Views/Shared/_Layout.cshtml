@@ -26,10 +26,19 @@
                         </li>
                     </ul>
                 </div>
-                @if (User.Identity.IsAuthenticated) 
-                { 
+                @if (User.Identity.IsAuthenticated)
+                {
                     <div class="navbar float-right">
-                        <span>Welcome </span><span class="text-success font-weight-bold p-2">@User.Identity.Name.ToUpper()</span><a class="btn btn-sm btn-danger font-weight-bold" asp-action="LogOut" asp-controller="Home" >SignOut</a> 
+                        <span>Welcome </span><span class="text-success font-weight-bold p-2">@User.Identity.Name.ToUpper()</span><a class="btn btn-sm btn-danger font-weight-bold" asp-action="LogOut" asp-controller="Home">SignOut</a>
+                    </div>
+
+
+                }
+                else
+                {
+                    <div class="navbar float-right">
+                        <a class="btn btn-sm btn-danger font-weight-bold" asp-action="LogIn" asp-controller="Home">Login</a>
+                        <a class="btn btn-sm btn-danger font-weight-bold" asp-action="SignUp" asp-controller="Home">SignIn</a>
                     </div>
                 }
             </div>
