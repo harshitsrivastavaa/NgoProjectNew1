@@ -1,20 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<<<<<<< HEAD
 
 <style>
 
-
-=======
-<style>
->>>>>>> d94c63ea8e87a004e96907949e636dda7015ccb8
-  @*  .carousel-item{
-        height:100vh;
-        min-height:300px;
-    }*@
     .carousel-caption{
-  @*      bottom:25%;*@
         z-index:1
     }
     .carousel-caption h5 {
@@ -39,39 +29,6 @@
         z-index:1;
     }
 </style>
-<!--<style>-->
-  @*  .carousel-item{
-        height:100vh;
-        min-height:300px;
-    }*@
-    <!--.carousel-caption{-->
-  @*      bottom:25%;*@
-        <!--z-index:1
-    }
-    .carousel-caption h5 {
-            font-size:45px;
-            text-transform:uppercase;
-            letter-spacing:2px;
-            margin-top:25px;
-        }
-    .carousel-caption p{
-
-        margin:auto;
-        font-size:18px;
-        line-height:1.9
-    }
-    .carousel-inner::before{
-        content:'';
-        position:absolute;
-        width:100%;
-        height:100%;
-        top:0;
-        left:0;
-        background:rgba(0,0,0,0.7);
-        z-index:1;
-
-    }
-</style>-->
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -83,9 +40,18 @@
         <div class="carousel-item active">
             <img class="d-block w-100" src="~/image6.jpg" style="height: 530px; object-fit: cover;  " alt="Third slide">
             <div class="carousel-caption  d-md-block">
-                <h5 style="font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif">Raise a cause, Raise a live</h5>
+                <h5 style="font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif">Raise a cause, Raise a life</h5>
                 <p>Help the Others</p>
-                <p style="color:black;font-weight:700;background-color:yellow;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-transform:uppercase" class="btn btn-warning mt-5"><a style="color:black" asp-area="" asp-controller="Signup" asp-action="Signup">Raise a Cause</a></p>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <p style="color:black;font-weight:700;background-color:yellow;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-transform:uppercase" class="btn btn-warning mt-5"><a style="color:black" asp-controller="Home" asp-action="Signup">Raise a Cause</a></p>
+
+                }
+                else
+                {
+                    <p style="color:black;font-weight:700;background-color:yellow;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-transform:uppercase" class="btn btn-warning mt-5"><a style="color:black" asp-controller="Home" asp-action="LogIn">Raise a Cause</a></p>
+
+                }
             </div>
         </div>
         <div class="carousel-item ">
@@ -95,7 +61,6 @@
                     You have not lived today until you have done something for someone who can never repay you
                 </h5>
                 <p>Charles Dickens</p>
-                @*  /<p style="color:black;font-weight:700" class="btn btn-warning mt-5"><a asp-area="" asp-controller="Signup" asp-action="Signup">Raise a Cause</a></p>*@
             </div>
 
         </div>
@@ -106,7 +71,7 @@
                 <p>Bill Gates</p>
             </div>
         </div>
-
+</div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -116,20 +81,7 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-<<<<<<< HEAD
 
-=======
->>>>>>> d94c63ea8e87a004e96907949e636dda7015ccb8
-</div>
-@*
-    <div class="carousel-item">
-        <img src="~/image6.jpg" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-            <h5>...</h5>
-            <p>...</p>
-        </div>
-    </div>*@
-@*@RenderSection("NewsFeed", true);*@
 
 <div class="container my-5">
 

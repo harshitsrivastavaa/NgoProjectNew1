@@ -87,7 +87,7 @@ namespace NgoProjectNew1.Controllers
         }
 
         [AcceptVerbs("Get","Post")]
-        public JsonResult UserNameIsExist(string userName)
+        public IActionResult UserNameIsExist(string userName)
         {
             var data = _context.NgoRegMembers.Where(e => e.Username == userName).SingleOrDefault();
 
@@ -113,14 +113,21 @@ namespace NgoProjectNew1.Controllers
             if (ModelState.IsValid)
             {
                 var data = new NgoRegMember()
-                { 
+                {
                     Username = model.Username,
                     ContactNo = model.ContactNo,
                     Address = model.Address,
                     Name = model.Name,
-                    Password=model.Password
+                    Password = model.Password,
+                    CreatedDate = DateTime.Today.Date,
                 };
+                var data2 = new Cause()
+                {
+                    CauseId = model.MemberId
+                };
+
                 _context.NgoRegMembers.Add(data);
+                _context.Causes.Add(data2);
                 _context.SaveChanges();
                 TempData["successMessage"] = "Registartion done successfully";
                 return RedirectToAction("Login");
@@ -132,6 +139,32 @@ namespace NgoProjectNew1.Controllers
             }
         }
 
-     }
+/*        public IActionResult RaiseACause(CausesViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var data = new CausesViewModel()
+                {
+                    RaiserName = model.RaiserName,
+                    *//*ContactNo = model.ContactNo,
+                    Address = model.Address,
+                    Name = model.Name,
+                    Password = model.Password,
+                    CreatedDate = DateTime.Today.Date,*//*
+                };
+                var results = _context.Causes
+                         .Where(r => r.RaiserName.Contains(model.RaiserName));
+
+
+            }
+            else
+            {
+                TempData["errorMessage"] = "Empty form can't be submitted!";
+                return View(model);
+            }
+
+        }*/
+
+    }
  }
 

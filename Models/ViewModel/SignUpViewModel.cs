@@ -13,6 +13,7 @@ namespace NgoProjectNew1.Models.ViewModel
         [Required(ErrorMessage = "UserName is Required")]
         [Remote(action: "UserNameIsExist", controller:"Home")]
         public string Username { get; set; }
+        public int MemberId { get; set; }
 
         [Required(ErrorMessage = "Name is Required")]
         public string Name { get; set; }

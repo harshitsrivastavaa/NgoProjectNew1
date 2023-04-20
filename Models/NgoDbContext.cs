@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -8,6 +9,8 @@ namespace NgoProjectNew1.Models
 {
     public partial class NgoDbContext : DbContext
     {
+        internal IEnumerable<object> SearchResults;
+
         public NgoDbContext()
         {
         }
@@ -17,6 +20,7 @@ namespace NgoProjectNew1.Models
         {
         }
 
+        public virtual DbSet<Cause> Causes { get; set; }
         public virtual DbSet<NgoLogin> NgoLogins { get; set; }
         public virtual DbSet<NgoNews> NgoNews { get; set; }
         public virtual DbSet<NgoRegMember> NgoRegMembers { get; set; }
@@ -34,6 +38,51 @@ namespace NgoProjectNew1.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AI");
+
+            modelBuilder.Entity<Cause>(entity =>
+            {
+                entity.Property(e => e.CauseId).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Category)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CauseDesc)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CauseName)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Contact)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EndDate).HasColumnType("date");
+
+                entity.Property(e => e.PickUpAddress)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RaiserCount)
+                    .HasColumnName("raiserCount")
+                    .HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.RaiserName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("raiserName");
+
+                entity.Property(e => e.StartDate).HasColumnType("date");
+
+                entity.HasOne(d => d.CauseNavigation)
+                    .WithOne(p => p.Cause)
+                    .HasForeignKey<Cause>(d => d.CauseId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Causes__CauseId__3C69FB99");
+            });
 
             modelBuilder.Entity<NgoLogin>(entity =>
             {

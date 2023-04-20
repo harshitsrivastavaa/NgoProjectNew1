@@ -6,19 +6,21 @@
     <title>@ViewData["Title"] - NgoProjectNew1</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <style>
-<<<<<<< HEAD
-            .blink {
-                animation: blinker 1.5s linear infinite;
-                color: red;
-                font-family: sans-serif;
+
+        .blink {
+            animation: blinker 1.5s linear infinite;
+            color: red;
+            font-family: sans-serif;
+        }
+
+        @@keyframes blinker {
+            50% {
+                opacity: 0;
             }
-            @@keyframes blinker {
-                50% {
-                    opacity: 0;
-                }
-            }
-=======
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -41,7 +43,6 @@
             background-color: #98DFD6;
             color: black;
         }
->>>>>>> d94c63ea8e87a004e96907949e636dda7015ccb8
     </style>
 </head>
 
@@ -92,11 +93,10 @@
                             <a class="nav-link border rounded" id="auth" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
                         </li>
                         <li class="nav-item" id="link">
-<<<<<<< HEAD
+
                             <a class="nav-link border rounded" id="auth" asp-area="" asp-controller="Home" asp-action="Signup">Register</a>
-=======
-                            <a class="nav-link border rounded" id="auth" asp-action="Signup">Register</a>
->>>>>>> d94c63ea8e87a004e96907949e636dda7015ccb8
+
+
                         </li>
 
                     </ul>
