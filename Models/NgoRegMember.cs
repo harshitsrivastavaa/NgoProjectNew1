@@ -7,6 +7,11 @@ namespace NgoProjectNew1.Models
 {
     public partial class NgoRegMember
     {
+        public NgoRegMember()
+        {
+            Causes = new HashSet<Cause>();
+        }
+
         public int MemberId { get; set; }
         public string Name { get; set; }
         public string Gender { get; set; }
@@ -23,6 +28,6 @@ namespace NgoProjectNew1.Models
         public string Password { get; set; }
 
         public virtual NgoUserRole Role { get; set; }
-        public virtual Cause Cause { get; set; }
+        public virtual ICollection<Cause> Causes { get; set; }
     }
 }

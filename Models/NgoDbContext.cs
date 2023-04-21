@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -9,8 +8,6 @@ namespace NgoProjectNew1.Models
 {
     public partial class NgoDbContext : DbContext
     {
-        internal IEnumerable<object> SearchResults;
-
         public NgoDbContext()
         {
         }
@@ -41,8 +38,6 @@ namespace NgoProjectNew1.Models
 
             modelBuilder.Entity<Cause>(entity =>
             {
-                entity.Property(e => e.CauseId).ValueGeneratedOnAdd();
-
                 entity.Property(e => e.Category)
                     .HasMaxLength(20)
                     .IsUnicode(false);
@@ -77,11 +72,10 @@ namespace NgoProjectNew1.Models
 
                 entity.Property(e => e.StartDate).HasColumnType("date");
 
-                entity.HasOne(d => d.CauseNavigation)
-                    .WithOne(p => p.Cause)
-                    .HasForeignKey<Cause>(d => d.CauseId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Causes__CauseId__3C69FB99");
+                entity.HasOne(d => d.Member)
+                    .WithMany(p => p.Causes)
+                    .HasForeignKey(d => d.MemberId)
+                    .HasConstraintName("FK__Causes__MemberId__49C3F6B7");
             });
 
             modelBuilder.Entity<NgoLogin>(entity =>

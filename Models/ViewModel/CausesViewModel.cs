@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,9 @@ namespace NgoProjectNew1.Models.ViewModel
 {
     public class CausesViewModel
     {
+        public int? MemberId { get; set; }
+        [Key]
+        public int CauseId { get; set; }
         public string RaiserName { get; set; }
         public string CauseName { get; set; }
         public DateTime? StartDate { get; set; }

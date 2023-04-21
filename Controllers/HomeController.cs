@@ -121,13 +121,13 @@ namespace NgoProjectNew1.Controllers
                     Password = model.Password,
                     CreatedDate = DateTime.Today.Date,
                 };
-                var data2 = new Cause()
+               /* var data2 = new Cause()
                 {
                     CauseId = model.MemberId
-                };
+                };*/
 
                 _context.NgoRegMembers.Add(data);
-                _context.Causes.Add(data2);
+                //_context.Causes.Add(data2);
                 _context.SaveChanges();
                 TempData["successMessage"] = "Registartion done successfully";
                 return RedirectToAction("Login");
@@ -139,31 +139,57 @@ namespace NgoProjectNew1.Controllers
             }
         }
 
-/*        public IActionResult RaiseACause(CausesViewModel model)
+        public IActionResult RaiseACause()
         {
-            if (ModelState.IsValid)
-            {
-                var data = new CausesViewModel()
-                {
-                    RaiserName = model.RaiserName,
-                    *//*ContactNo = model.ContactNo,
-                    Address = model.Address,
-                    Name = model.Name,
-                    Password = model.Password,
-                    CreatedDate = DateTime.Today.Date,*//*
-                };
-                var results = _context.Causes
-                         .Where(r => r.RaiserName.Contains(model.RaiserName));
 
-
-            }
-            else
+            return View();
+        }
+        [HttpPost]
+        public IActionResult RaiseACause(CausesViewModel model)
+        {
+            if (!ModelState.IsValid)
             {
                 TempData["errorMessage"] = "Empty form can't be submitted!";
+                //return View(model);
                 return View(model);
             }
 
-        }*/
+            var userName = HttpContext.Session.GetString("Username");
+            var memId = _context.NgoRegMembers.Where(user => user.Username == userName).FirstOrDefault().MemberId;
+            var isExist = _context.Causes.Where(user => user.MemberId == memId).FirstOrDefault();
+
+            if (isExist == null)
+            {
+                Cause c1 = new Cause();
+                c1.MemberId = memId;
+                c1.RaiserName = model.RaiserName;
+                c1.CauseName = model.CauseName;
+                c1.StartDate = model.StartDate;
+                c1.EndDate = model.EndDate;
+                c1.Category = model.Category;
+                c1.Contact = model.Contact;
+                c1.CauseDesc = model.CauseDesc;
+
+                _context.Causes.Add(c1);
+            }
+
+            else
+            {
+                isExist.RaiserName = model.RaiserName;
+                isExist.CauseName = model.CauseName;
+                isExist.StartDate = model.StartDate;
+                isExist.EndDate = model.EndDate;
+                isExist.Category = model.Category;
+                isExist.Contact = model.Contact;
+                isExist.CauseDesc = model.CauseDesc;
+            }
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+
+        }
+
+        
 
     }
  }

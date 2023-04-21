@@ -7,6 +7,7 @@ namespace NgoProjectNew1.Models
 {
     public partial class Cause
     {
+        public int? MemberId { get; set; }
         public int CauseId { get; set; }
         public string RaiserName { get; set; }
         public string CauseName { get; set; }
@@ -18,6 +19,6 @@ namespace NgoProjectNew1.Models
         public string PickUpAddress { get; set; }
         public int? RaiserCount { get; set; }
 
-        public virtual NgoRegMember CauseNavigation { get; set; }
+        public virtual NgoRegMember Member { get; set; }
     }
 }
