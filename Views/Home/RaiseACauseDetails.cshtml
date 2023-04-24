@@ -1,0 +1,79 @@
+﻿@model NgoProjectNew1.Models.ViewModel.CausesViewModel
+
+@{
+    ViewData["Title"] = "RaiseACauseDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>RaiseACauseDetails</h1>
+
+<div>
+    <h4>CausesViewModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MemberId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MemberId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RaiserName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RaiserName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CauseName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CauseName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Contact)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Contact)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CauseDesc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CauseDesc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PickUpAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PickUpAddress)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RaiserCount)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RaiserCount)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CauseId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
