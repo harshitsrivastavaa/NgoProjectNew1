@@ -42,16 +42,10 @@
             <div class="carousel-caption  d-md-block">
                 <h5 style="font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif">Raise a cause, Raise a life</h5>
                 <p>Help the Others</p>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <p style="color:black;font-weight:700;background-color:yellow;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-transform:uppercase" class="btn btn-warning mt-5"><a style="color:black" asp-controller="Home" asp-action="RaiseACause">Raise a Cause</a></p>
+               
+                    <p style="color:black;font-weight:700;background-color:yellow;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-transform:uppercase" class="btn btn-warning mt-5"><a style="color:black" asp-controller="Home" asp-action="RaiseDetails">Donate</a></p>
 
-                }
-                else
-                {
-                    <p style="color:black;font-weight:700;background-color:yellow;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;text-transform:uppercase" class="btn btn-warning mt-5"><a style="color:black" asp-controller="Home" asp-action="LogIn">Raise a Cause</a></p>
-
-                }
+              
             </div>
         </div>
         <div class="carousel-item ">

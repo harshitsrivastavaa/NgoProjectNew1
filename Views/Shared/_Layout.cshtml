@@ -100,6 +100,21 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Contact Us</a>
                         </li>
 
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="RaiseACause">Raise a Cause</a>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Login">Raise a Cause</a>
+                            </li>
+
+                        }
+
                     </ul>
                     @if (User.Identity.IsAuthenticated)
                     {

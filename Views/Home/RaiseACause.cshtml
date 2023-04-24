@@ -2,74 +2,312 @@
 
 @{
     ViewData["Title"] = "RaiseACause";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-<h1>RaiseACause</h1>
+@*<h1>RaiseACause</h1>
 
-<h4>CausesViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form action="@Url.Action("RaiseACause", "Home")" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <h4>CausesViewModel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form action="@Url.Action("RaiseACause", "Home")" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="RaiserName" class="control-label"></label>
-                <input asp-for="RaiserName" class="form-control" />
-                <span asp-validation-for="RaiserName" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="RaiserName" class="control-label"></label>
+                    <input asp-for="RaiserName" class="form-control" />
+                    <span asp-validation-for="RaiserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CauseName" class="control-label"></label>
+                    <input asp-for="CauseName" class="form-control" />
+                    <span asp-validation-for="CauseName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label"></label>
+                    <input asp-for="StartDate" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EndDate" class="control-label"></label>
+                    <input asp-for="EndDate" class="form-control" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Category" class="control-label"></label>
+                    <input asp-for="Category" class="form-control" />
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Contact" class="control-label"></label>
+                    <input asp-for="Contact" class="form-control" />
+                    <span asp-validation-for="Contact" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CauseDesc" class="control-label"></label>
+                    <input asp-for="CauseDesc" class="form-control" />
+                    <span asp-validation-for="CauseDesc" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PickUpAddress" class="control-label"></label>
+                    <input asp-for="PickUpAddress" class="form-control" />
+                    <span asp-validation-for="PickUpAddress" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RaiserCount" class="control-label"></label>
+                    <input asp-for="RaiserCount" class="form-control" />
+                    <span asp-validation-for="RaiserCount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+*@
+
+<style>
+
+    /* Import Google font - Poppins */
+    @@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap);
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background-image: url('https://i0.wp.com/www.goodwin.edu/enews/wp-content/uploads/2021/05/Best-Careers-that-Involve-Helping-Others-1.jpg?resize=1920%2C768&ssl=1');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position:top left;
+    }
+
+    .container {
+        position: relative;
+       @* max-width: 700px;*@
+        width: 100%;
+        background: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+        .container header {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .container .form {
+            margin-top: 30px;
+        }
+
+    .form .input-box {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .input-box label {
+        color: #333;
+    }
+
+    .form :where(.input-box input, .select-box) {
+        position: relative;
+        height: 50px;
+        width: 100%;
+        outline: none;
+        font-size: 1rem;
+        color: #707070;
+        margin-top: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 0 15px;
+    }
+
+    .input-box input:focus {
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .form .column {
+        display: flex;
+        column-gap: 15px;
+    }
+
+    .form .gender-box {
+        margin-top: 20px;
+    }
+
+    .gender-box h3 {
+        color: #333;
+        font-size: 1rem;
+        font-weight: 400;
+        margin-bottom: 8px;
+    }
+
+    .form :where(.gender-option, .gender) {
+        display: flex;
+        align-items: center;
+        column-gap: 50px;
+        flex-wrap: wrap;
+    }
+
+    .form .gender {
+        column-gap: 5px;
+    }
+
+    .gender input {
+        accent-color: rgb(130, 106, 251);
+    }
+
+    .form :where(.gender input, .gender label) {
+        cursor: pointer;
+    }
+
+    .gender label {
+        color: #707070;
+    }
+
+    .address :where(input, .select-box) {
+        margin-top: 15px;
+    }
+
+    .select-box select {
+        height: 100%;
+        width: 100%;
+        outline: none;
+        border: none;
+        color: #707070;
+        font-size: 1rem;
+    }
+
+    .form button {
+        height: 55px;
+        width: 100%;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 400;
+        margin-top: 30px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: rgb(130, 106, 251);
+    }
+
+        .form button:hover {
+            background: rgb(88, 56, 250);
+        }
+    /*Responsive*/
+    @@media screen and (max-width: 500px) {
+        .form .column {
+            flex-wrap: wrap;
+        }
+    }
+</style>
+
+
+<section class="px-5 py-6 py-xxl-10 hcf-bp-center hcf-bs-cover hcf-overlay hcf-transform">
+    <a class="btn " asp-controller="Home" asp-action="Index" style="color:white;width:20px;height:10px"></a>
+
+
+    <div>
+        <div class="row justify-content-md-center">
+            <div class="col-12 col-md-11 col-lg-9 col-xl-7 col-xxl-6 text-center text-white">
+
+                <h1 class="display-3 fw-bold mb-3">Art of Helping</h1>
+                <p class="lead mb-5">If One Is Truly to Succeed in Leading a Person to a Specific Place, One Must First and Foremost Take Care to Find Him Where He is and Begin There. This is the secret in the entire art of helping</p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <button type="button" class="btn" style="background-color: #F15A59 " data-toggle="modal" data-target=".bd-example-modal-lg">Raise a Cause</button>
+
+
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="CauseName" class="control-label"></label>
-                <input asp-for="CauseName" class="form-control" />
-                <span asp-validation-for="CauseName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <span asp-validation-for="Category" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Contact" class="control-label"></label>
-                <input asp-for="Contact" class="form-control" />
-                <span asp-validation-for="Contact" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CauseDesc" class="control-label"></label>
-                <input asp-for="CauseDesc" class="form-control" />
-                <span asp-validation-for="CauseDesc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PickUpAddress" class="control-label"></label>
-                <input asp-for="PickUpAddress" class="form-control" />
-                <span asp-validation-for="PickUpAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RaiserCount" class="control-label"></label>
-                <input asp-for="RaiserCount" class="form-control" />
-                <span asp-validation-for="RaiserCount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+    </div>
+</section>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <section class="container">
+                <header>Raise a Cause   </header>
+                <form action="@Url.Action("RaiseACause","Home")" class="form" method="post">
+                    <div class="input-box">
+                        <label asp-for="RaiserName" class="control-label"></label>
+                        <input asp-for="RaiserName" class="form-control" />
+                        <span asp-validation-for="RaiserName" class="text-danger"></span>
+                    </div>
+                    <div class="input-box">
+                        <label asp-for="CauseName" class="control-label"></label>
+                        <input asp-for="CauseName" class="form-control" />
+                        <span asp-validation-for="CauseName" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="column">
+                        <div class="input-box">
+                            <label asp-for="StartDate" class="control-label"></label>
+                            <input asp-for="StartDate" class="form-control" />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+                        <div class="input-box">
+                            <label asp-for="EndDate" class="control-label"></label>
+                            <input asp-for="EndDate" class="form-control" />
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="input-box">
+                        <label asp-for="Contact" class="control-label"></label>
+                        <input asp-for="Contact" class="form-control" />
+                        <span asp-validation-for="Contact" class="text-danger"></span>
+                    </div>
+                    <div class="input-box address">
+                        <label asp-for="PickUpAddress" class="control-label"></label>
+                        <input asp-for="PickUpAddress" class="form-control" />
+                        <span asp-validation-for="PickUpAddress" class="text-danger"></span>
+                        <div class="column">
+                            <div class="select-box">
+                                <select>
+                                    <option hidden>Country</option>
+                                    <option>America</option>
+                                    <option>Japan</option>
+                                    <option>India</option>
+                                    <option>Nepal</option>
+                                </select>
+                            </div>
+                            <input type="text" placeholder="Enter your city" required />
+                        </div>
+                        <div class="column flex-column mt-5">
+                            <label asp-for="CauseDesc" class="control-label"></label>
+                            <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px;width:100%;text-align:center;"></textarea>
+                          @*  <input asp-for="CauseDesc" class="form-control" />*@
+                            <span asp-validation-for="CauseDesc" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                    <button>Submit</button>
+                </form>
+            </section>
+
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NgoProjectNew1.Models;
 using NgoProjectNew1.Models.ViewModel;
@@ -38,12 +39,10 @@ namespace NgoProjectNew1.Controllers
         [HttpPost]
         public IActionResult Login(LoginSingupViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
-            }
-                try { 
-            
+                if (ModelState.IsValid)
+                {
                     var data = _context.NgoRegMembers.Where(e => e.Username == model.Username).SingleOrDefault();
                     if (data != null)
                     {
@@ -77,10 +76,15 @@ namespace NgoProjectNew1.Controllers
                         TempData["errorUsername"] = "Invalid Username";
                         return View(model);
                     }
+                }
+                else
+                {
+                    return View(model);
+                }
             }
             catch(Exception e)
             {
-                throw new Exception(e.Message);   
+                throw new Exception(e.Message);
                 
             }
         }
@@ -115,43 +119,64 @@ namespace NgoProjectNew1.Controllers
         [HttpPost]
         public IActionResult SignUp(SignUpViewModel model)
         {
-            try
+            
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                var data = new NgoRegMember()
                 {
-                    var data = new NgoRegMember()
-                    {
-                        Username = model.Username,
-                        ContactNo = model.ContactNo,
-                        Address = model.Address,
-                        Name = model.Name,
-                        Password = model.Password,
-                        CreatedDate = DateTime.Today.Date,
-                    };
-                    /* var data2 = new Cause()
-                     {
-                         CauseId = model.MemberId
-                     };*/
+                    Username = model.Username,
+                    ContactNo = model.ContactNo,
+                    Address = model.Address,
+                    Name = model.Name,
+                    Password = model.Password,
+                    CreatedDate = DateTime.Today.Date,
+                };
+               /* var data2 = new Cause()
+                {
+                    CauseId = model.MemberId
+                };*/
 
-                    _context.NgoRegMembers.Add(data);
-                    //_context.Causes.Add(data2);
-                    _context.SaveChanges();
-                    TempData["successMessage"] = "Registartion done successfully";
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    TempData["errorMessage"] = "Empty form can't be submitted!";
-                    return View(model);
-                }
+                _context.NgoRegMembers.Add(data);
+                //_context.Causes.Add(data2);
+                _context.SaveChanges();
+                TempData["successMessage"] = "Registartion done successfully";
+                return RedirectToAction("Index");
             }
-            catch(Exception e)
+            else 
             {
-                throw new Exception(e.Message);
-                
+                TempData["errorMessage"] = "Empty form can't be submitted!";
+                return View(model);
             }
         }
+/*        public async Task<IActionResult> RaiseDetails(int? id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
+                var causes = await _context.Causes      
+                    .FirstOrDefaultAsync(m => m.MemberId == id);
+                if (causes == null)
+                {
+                    return NotFound();
+                }
+
+                return View(causes);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+
+            }
+        }*/
+        public IActionResult RaiseDetails()
+        {
+            IEnumerable<Cause> causeList = _context.Causes.ToList();
+            return View(causeList);
+        }
         public IActionResult RaiseACause()
         {
 
@@ -160,53 +185,45 @@ namespace NgoProjectNew1.Controllers
         [HttpPost]
         public IActionResult RaiseACause(CausesViewModel model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    TempData["errorMessage"] = "Empty form can't be submitted!";
-                    //return View(model);
-                    return View(model);
-                }
-
-                var userName = HttpContext.Session.GetString("Username");
-                var memId = _context.NgoRegMembers.Where(user => user.Username == userName).FirstOrDefault().MemberId;
-                var isExist = _context.Causes.Where(user => user.MemberId == memId).FirstOrDefault();
-
-                if (isExist == null)
-                {
-                    Cause c1 = new Cause();
-                    c1.MemberId = memId;
-                    c1.RaiserName = model.RaiserName;
-                    c1.CauseName = model.CauseName;
-                    c1.StartDate = model.StartDate;
-                    c1.EndDate = model.EndDate;
-                    c1.Category = model.Category;
-                    c1.Contact = model.Contact;
-                    c1.CauseDesc = model.CauseDesc;
-
-                    _context.Causes.Add(c1);
-                }
-
-                else
-                {
-                    isExist.RaiserName = model.RaiserName;
-                    isExist.CauseName = model.CauseName;
-                    isExist.StartDate = model.StartDate;
-                    isExist.EndDate = model.EndDate;
-                    isExist.Category = model.Category;
-                    isExist.Contact = model.Contact;
-                    isExist.CauseDesc = model.CauseDesc;
-                }
-                _context.SaveChanges();
-
-                return RedirectToAction("Index");
+                TempData["errorMessage"] = "Empty form can't be submitted!";
+                //return View(model);
+                return View(model);
             }
-            catch (Exception e)
+
+            var userName = HttpContext.Session.GetString("Username");
+            var memId = _context.NgoRegMembers.Where(user => user.Username == userName).FirstOrDefault().MemberId;
+            var isExist = _context.Causes.Where(user => user.MemberId == memId).FirstOrDefault();
+
+            if (isExist == null)
             {
-                throw new Exception(e.Message);
+                Cause c1 = new Cause();
+                c1.MemberId = memId;
+                c1.RaiserName = model.RaiserName;
+                c1.CauseName = model.CauseName;
+                c1.StartDate = model.StartDate;
+                c1.EndDate = model.EndDate;
+                c1.Category = model.Category;
+                c1.Contact = model.Contact;
+                c1.CauseDesc = model.CauseDesc;
 
+                _context.Causes.Add(c1);
             }
+
+            else
+            {
+                isExist.RaiserName = model.RaiserName;
+                isExist.CauseName = model.CauseName;
+                isExist.StartDate = model.StartDate;
+                isExist.EndDate = model.EndDate;
+                isExist.Category = model.Category;
+                isExist.Contact = model.Contact;
+                isExist.CauseDesc = model.CauseDesc;
+            }
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
 
         }
 

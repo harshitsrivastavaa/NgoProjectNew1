@@ -1,0 +1,96 @@
+﻿@model IEnumerable<NgoProjectNew1.Models.Cause>
+
+@{
+    ViewData["Title"] = "RaiseDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>RaiseDetails</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RaiserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CauseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CauseDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PickUpAddress)
+            </th>
+          @*  <th>
+                @Html.DisplayNameFor(model => model.RaiserCount)
+            </th>*@
+           @* <th>
+                @Html.DisplayNameFor(model => model.Member)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RaiserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CauseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CauseDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickUpAddress)
+            </td>
+            <td>
+                <a class="btn btn-primary"> Donate</a>
+            </td>
+            
+           @* <td>
+                @Html.DisplayFor(modelItem => item.RaiserCount)
+            </td>*@
+          @*  <td>
+                @Html.DisplayFor(modelItem => item.Member.Password)
+            </td>*@
+           @* <td>
+                <a asp-action="Edit" asp-route-id="@item.CauseId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CauseId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CauseId">Delete</a>
+            </td>*@
+        </tr>
+      
+}
+        <button>Donate</button>
+    </tbody>
+</table>
