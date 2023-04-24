@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -31,20 +32,28 @@ namespace NgoProjectNew1.Controllers
         // GET: Admin/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var ngoRegMember = await _context.NgoRegMembers
-                .Include(n => n.Role)
-                .FirstOrDefaultAsync(m => m.MemberId == id);
-            if (ngoRegMember == null)
+                var ngoRegMember = await _context.NgoRegMembers
+                    .Include(n => n.Role)
+                    .FirstOrDefaultAsync(m => m.MemberId == id);
+                if (ngoRegMember == null)
+                {
+                    return NotFound();
+                }
+
+                return View(ngoRegMember);
+            }
+            catch (Exception e)
             {
-                return NotFound();
-            }
+                throw new Exception(e.Message);
 
-            return View(ngoRegMember);
+            }
         }
 
         // GET: Admin/Create
@@ -55,42 +64,54 @@ namespace NgoProjectNew1.Controllers
         }
 
         // POST: Admin/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MemberId,Name,Gender,Address,ContactNo,RoleId,IsActive,AdminComments,CreatedBy,CreatedDate,UpdatedDate,ModifiedBy,Username,Password")] NgoRegMember ngoRegMember)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(ngoRegMember);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(ngoRegMember);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["RoleId"] = new SelectList(_context.NgoUserRoles, "RoleId", "RoleId", ngoRegMember.RoleId);
+                return View(ngoRegMember);
             }
-            ViewData["RoleId"] = new SelectList(_context.NgoUserRoles, "RoleId", "RoleId", ngoRegMember.RoleId);
-            return View(ngoRegMember);
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+
+            }
         }
 
         // GET: Admin/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var ngoRegMember = await _context.NgoRegMembers.FindAsync(id);
-            if (ngoRegMember == null)
-            {
-                return NotFound();
+                var ngoRegMember = await _context.NgoRegMembers.FindAsync(id);
+                if (ngoRegMember == null)
+                {
+                    return NotFound();
+                }
+                ViewData["RoleId"] = new SelectList(_context.NgoUserRoles, "RoleId", "RoleId", ngoRegMember.RoleId);
+                return View(ngoRegMember);
             }
-            ViewData["RoleId"] = new SelectList(_context.NgoUserRoles, "RoleId", "RoleId", ngoRegMember.RoleId);
-            return View(ngoRegMember);
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+
+            }
         }
 
         // POST: Admin/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MemberId,Name,Gender,Address,ContactNo,RoleId,IsActive,AdminComments,CreatedBy,CreatedDate,UpdatedDate,ModifiedBy,Username,Password")] NgoRegMember ngoRegMember)
@@ -148,11 +169,29 @@ namespace NgoProjectNew1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var isExist = _context.Causes.Where(user => user.MemberId == id).FirstOrDefault();
+
+            if (isExist!=null)
+            {
+                _context.Causes.Remove(isExist);
+            }
             var ngoRegMember = await _context.NgoRegMembers.FindAsync(id);
-            _context.NgoRegMembers.Remove(ngoRegMember);
+                _context.NgoRegMembers.Remove(ngoRegMember);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            
+        }
+        [HttpPost, ActionName("DeleteACause")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteACause(int id)
+        {
+            var causes = await _context.Causes.FindAsync(id);
+            _context.Causes.Remove(causes);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+
         }
+
 
         private bool NgoRegMemberExists(int id)
         {

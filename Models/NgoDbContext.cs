@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using NgoProjectNew1.Models.ViewModel;
 
 #nullable disable
 
@@ -202,5 +203,7 @@ namespace NgoProjectNew1.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<NgoProjectNew1.Models.ViewModel.CausesViewModel> CausesViewModel { get; set; }
     }
 }

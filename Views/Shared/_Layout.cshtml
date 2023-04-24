@@ -39,10 +39,33 @@
             padding-right: 10px;
         }
 
-        #auth {
-            background-color: #98DFD6;
-            color: black;
+        #btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
         }
+        /* Login Button Styles */
+            #btn-login {
+              background-color: #000000;
+              color: #fff;
+            }
+
+            /* Signup Button Styles */
+            #btn-signup {
+              background-color: #28a745;
+              color: #fff;
+            }
+
+            /* Hover Effect */
+            .btn:hover {
+              opacity: 0.8;
+            }
+
     </style>
 </head>
 
@@ -90,11 +113,11 @@
 
                     <ul class="navbar-nav ml-auto text-center mb-lg-0 mb-2">
                         <li class="nav-item" id="link">
-                            <a class="nav-link border rounded" id="auth" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                            <a class="btn btn-login" id="auth" asp-controller="Home" asp-action="Login">Login</a>
                         </li>
                         <li class="nav-item" id="link">
 
-                            <a class="nav-link border rounded" id="auth" asp-area="" asp-controller="Home" asp-action="Signup">Register</a>
+                            <a class="btn btn-signup" id="auth" asp-controller="Home" asp-action="Signup">Register</a>
 
 
                         </li>
