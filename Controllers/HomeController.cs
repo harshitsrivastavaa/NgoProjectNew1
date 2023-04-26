@@ -96,17 +96,17 @@ namespace NgoProjectNew1.Controllers
         }
 
         [AcceptVerbs("Get","Post")]
-        public IActionResult UserNameIsExist(string userName)
+        public bool UserNameIsExist(string userName)
         {
             var data = _context.NgoRegMembers.Where(e => e.Username == userName).SingleOrDefault();
 
             if (data != null)
             {
-                return Json($"Username {userName} already exist");
+                return false;
             }
             else
             {
-                return Json(true);
+                return true;
             }
         }
      
@@ -122,6 +122,11 @@ namespace NgoProjectNew1.Controllers
             
             if (ModelState.IsValid)
             {
+                if(_context.NgoRegMembers.Any(user => user.Username == model.Username))
+                {
+                    TempData["errorMessage"] = "Username Already taken";
+                    return View(model);
+                }
                 var data = new NgoRegMember()
                 {
                     Username = model.Username,
@@ -226,8 +231,19 @@ namespace NgoProjectNew1.Controllers
             return RedirectToAction("Index");
 
         }
+        [HttpPost, ActionName("DeleteACause")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteACause(int id)
+        {
+         
+            var causes =  _context.Causes.Find(id);
+            _context.Causes.Remove(causes);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
 
-        
+        }
+
+
 
     }
  }

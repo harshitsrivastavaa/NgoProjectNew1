@@ -253,12 +253,12 @@
                 <form action="@Url.Action("RaiseACause","Home")" class="form" method="post">
                     <div class="input-box">
                         <label asp-for="RaiserName" class="control-label"></label>
-                        <input asp-for="RaiserName" class="form-control" />
+                        <input asp-for="RaiserName" class="form-control" required />
                         <span asp-validation-for="RaiserName" class="text-danger"></span>
                     </div>
                     <div class="input-box">
                         <label asp-for="CauseName" class="control-label"></label>
-                        <input asp-for="CauseName" class="form-control" />
+                        <input asp-for="CauseName" class="form-control" required />
                         <span asp-validation-for="CauseName" class="text-danger"></span>
                     </div>
 
@@ -266,23 +266,23 @@
                     <div class="column">
                         <div class="input-box">
                             <label asp-for="StartDate" class="control-label"></label>
-                            <input asp-for="StartDate" class="form-control" />
+                            <input asp-for="StartDate" class="form-control"  required/>
                             <span asp-validation-for="StartDate" class="text-danger"></span>
                         </div>
                         <div class="input-box">
                             <label asp-for="EndDate" class="control-label"></label>
-                            <input asp-for="EndDate" class="form-control" />
+                            <input asp-for="EndDate" class="form-control" required/>
                             <span asp-validation-for="EndDate" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="input-box">
                         <label asp-for="Contact" class="control-label"></label>
-                        <input asp-for="Contact" class="form-control" />
+                        <input type="number" asp-for="Contact"class="form-control" required/>
                         <span asp-validation-for="Contact" class="text-danger"></span>
                     </div>
                     <div class="input-box address">
                         <label asp-for="PickUpAddress" class="control-label"></label>
-                        <input asp-for="PickUpAddress" class="form-control" />
+                        <input asp-for="PickUpAddress" class="form-control" required />
                         <span asp-validation-for="PickUpAddress" class="text-danger"></span>
                         <div class="column">
                             <div class="select-box">
@@ -298,7 +298,8 @@
                         </div>
                         <div class="column flex-column mt-5">
                             <label asp-for="CauseDesc" class="control-label"></label>
-                            <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px;width:100%;text-align:center;"></textarea>
+                            <input asp-for="CauseDesc"  placeholder="Write something.." style="height:200px;width:100%;text-align:center;"/>
+                            @*<textarea asp-for="CauseDesc"  id="subject" name="subject" placeholder="Write something.." style="height:200px;width:100%;text-align:center;"></textarea>*@
                           @*  <input asp-for="CauseDesc" class="form-control" />*@
                             <span asp-validation-for="CauseDesc" class="text-danger"></span>
                         </div>

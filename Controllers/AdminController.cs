@@ -11,6 +11,7 @@ using NgoProjectNew1.Models;
 
 namespace NgoProjectNew1.Controllers
 {
+    [Authorize]
     
     public class AdminController : Controller
     {

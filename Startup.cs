@@ -29,6 +29,7 @@ namespace NgoProjectNew1
             var connection = Configuration.GetConnectionString("NgoDatabase");
             services.AddDbContext<NgoDbContext>(options => options.UseSqlServer(connection));
             services.AddControllersWithViews();
+            services.AddSwaggerGen();
             services.AddDbContext<NgoDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
@@ -68,6 +69,8 @@ namespace NgoProjectNew1
             app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseEndpoints(endpoints =>
             {

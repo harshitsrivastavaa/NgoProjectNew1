@@ -7,9 +7,6 @@
 
 <h1>RaiseDetails</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -26,9 +23,6 @@
                 @Html.DisplayNameFor(model => model.EndDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Contact)
             </th>
             <th>
@@ -37,60 +31,78 @@
             <th>
                 @Html.DisplayNameFor(model => model.PickUpAddress)
             </th>
-          @*  <th>
-                @Html.DisplayNameFor(model => model.RaiserCount)
-            </th>*@
-           @* <th>
-                @Html.DisplayNameFor(model => model.Member)
-            </th>*@
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RaiserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CauseName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Contact)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CauseDesc)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PickUpAddress)
-            </td>
-            <td>
-                <a class="btn btn-primary"> Donate</a>
-            </td>
-            
-           @* <td>
-                @Html.DisplayFor(modelItem => item.RaiserCount)
-            </td>*@
-          @*  <td>
-                @Html.DisplayFor(modelItem => item.Member.Password)
-            </td>*@
-           @* <td>
-                <a asp-action="Edit" asp-route-id="@item.CauseId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CauseId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CauseId">Delete</a>
-            </td>*@
-        </tr>
-      
-}
-        <button>Donate</button>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RaiserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CauseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contact)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CauseDesc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PickUpAddress)
+                </td>
+                <td>
+                    <a  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Donate
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"> @User.Identity.Name.ToUpper() Status</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Donated Succesfully</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+                <td>
+                    @if ((item.RaiserName).ToUpper() == User.Identity.Name.ToUpper())
+                    {
+                      @*  <a asp-action="DeleteACause" asp-route-id="@item.CauseId" class="btn btn-primary">Delete</a>
+*@
+                        <form asp-action="DeleteACause" asp-route-id="@item.CauseId">
+                      @*  <input type="hidden" asp-for="@item.Causeid" />*@
+                        <input type="submit" asp-for="@item.CauseId" value="delete" class="btn btn-danger"/>
+                       
+                        </form>
+                    }
+                </td>
+            </tr>
+
+        }
+        <!-- Button trigger modal -->
+        
     </tbody>
 </table>

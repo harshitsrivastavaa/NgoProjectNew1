@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -14,6 +15,8 @@ namespace NgoProjectNew1.Models
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string Category { get; set; }
+        [Required(ErrorMessage = "Mobile is required")]
+        [RegularExpression(@"\d{10}", ErrorMessage = "Please enter 10 digit Mobile No.")]
         public string Contact { get; set; }
         public string CauseDesc { get; set; }
         public string PickUpAddress { get; set; }
